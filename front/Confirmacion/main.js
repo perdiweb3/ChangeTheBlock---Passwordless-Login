@@ -4,11 +4,18 @@ window.onload = () => {
 
     const verifyToken = async () => {
         const url = "http://localhost:4000/verifyToken?token="+tokenInput.value;
-        console.log(url);
-        const message = await axios.get(url);
-        console.log(message);
+        let message;
+        
+        try{
+            message = await axios.get(url);
+        }catch(e){
+            alert(e.response.data);
+        }
+
         if(message.status == 200){
-            alert("Login Successfully");
+            alert("Login Correcto.");
+        }else{
+            alert("Token no valido.")
         }
     }
 
